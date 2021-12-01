@@ -1,6 +1,6 @@
 from celery import Celery
 from cpu_stress import stress
-from scraper import get_info1 as get_data
+from scraper import startpy as get_data
 
 celery = Celery('tasks',
                 broker='redis://redis:6379',
