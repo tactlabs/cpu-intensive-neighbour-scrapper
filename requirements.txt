@@ -1,0 +1,10 @@
+cpu-load-generator
+flask
+bs4
+requests
+pymongo
+python-dotenv
+dnspython
+celery
+redis
+lxml
