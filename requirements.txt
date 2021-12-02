@@ -9,5 +9,4 @@ celery
 redis
 lxml
 selenium
-BeautifulSoup
 pandas
