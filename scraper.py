@@ -29,10 +29,8 @@ chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument(f'user-agent={user_agent}')
 
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=DRIVER_PATH)
+driver = webdriver.Chrome(options=chrome_options, executable_path=DRIVER_PATH)
 
 total_links_list = []
 
@@ -40,7 +38,8 @@ try:
     os.mkdir(os.path.join(os.getcwd(), 'images'))
     with open('info.csv', 'w'):
         pass
-except:
+except Exception as e:
+    print(e)
     pass
 
 
@@ -64,7 +63,7 @@ def id_count():
         # print(count)
         return count
     except Exception as e:
-        print (e)
+        print(e)
         return 1
 
 
@@ -75,14 +74,17 @@ def get_scraped_links():
     # try:
     #     for i in data['pages']:
     #         total_links_list.append(i['url']) 
-    # except:
+    # except Exception as e:
+    # print(e)
+
     #     pass
     try:
         df = pd.read_csv('info.csv',usecols = ['url'])
         temp = df.to_dict()
         for val in temp['url'].values():
             total_links_list.append(val)
-    except:
+    except Exception as e:
+        print(e)
         pass
         
 
@@ -100,28 +102,35 @@ def get_price(link):
 
 
     try:
-        subtotal = driver.find_element(By.XPATH'//*[@id="default_reserve_card_subtotal"]/div').text
-    except:
+        subtotal = driver.find_element(By.XPATH,'//*[@id="default_reserve_card_subtotal"]/div').text
+    except Exception as e:
+        print(e)
         subtotal = "None"
     # print(subtotal)                            //*[@id="default_reserve_card_subtotal"]/div/p
 
     try:
         
         try:
-            service_tax = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[3]/div[1]/div/div[2]/span/div/p[1]').text
-        except:
-            service_tax = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[2]/div[1]/div/div[2]/span/div/p').text
-    except:
+            service_tax = driver.find_element(By.XPATH,'//*[@id="reserve"]/div/div[3]/div[1]/div/div[2]/span/div/p[1]').text
+        except Exception as e:
+            print(e)
+
+            service_tax = driver.find_element(By.XPATH,'//*[@id="reserve"]/div/div[2]/div[1]/div/div[2]/span/div/p').text
+    except Exception as e:
+        print(e)
         service_tax = "None"
     # print(service_tax)
 
     try:
         
         try:
-            total = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[2]/div[2]/div[1]/p[2]').text
-        except:
-            total = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[3]/div[2]/span/div/span').text
-    except:
+            total = driver.find_element(By.XPATH,'//*[@id="reserve"]/div/div[2]/div[2]/div[1]/p[2]').text
+        except Exception as e:
+            print(e)
+
+            total = driver.find_element(By.XPATH,'//*[@id="reserve"]/div/div[3]/div[2]/span/div/span').text
+    except Exception as e:
+        print(e)
         total = "None"
         
 
@@ -156,7 +165,9 @@ def description():
                 try:
                     val = p.get_text().replace('\xa0', '')
                     specs[prev.get_text()] = val
-                except:
+                except Exception as e:
+                    print(e)
+        
                     specs[prev.get_text()] = p.get_text()
 
             i+=1
@@ -171,7 +182,8 @@ def description():
         # print(spec_dict)
         return spec_dict
 
-    except:
+    except Exception as e:
+        print(e)
         # print(specs)
         return specs
 
@@ -216,40 +228,44 @@ def get_info1(link,price,images,count):
     time.sleep(3)    
 
     try:
-        title = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/h2').text
-    except:
+        title = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/h2').text
+    except Exception as e:
+        print(e)
         title = "None"
     # print(title)                        
 
     specs = description()
 
-    size = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/p').text
+    size = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/p').text
     # print(size)
 
-    storage = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[2]/p[2]').text
+    storage = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[2]/p[2]').text
     # print(storage)
 
 
-    access =  driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[3]/div[1]/p[2]').text
+    access =  driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[3]/div[1]/p[2]').text
     # print(access)
                                         
 
-    hours = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[4]/div[1]/div/p').text
+    hours = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[4]/div[1]/div/p').text
     # print(hours)
     try:                    
-        host = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div/span').text
-    except:
+        host = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div/span').text
+    except Exception as e:
+        print(e)
         host = "None"
     # print(host)
 
     try:
-        summary = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[3]/p[2]').text
-    except:
+        summary = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[3]/p[2]').text
+    except Exception as e:
+        print(e)
         summary = "None"
 
     try:
-        location = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div[2]/p[3]/a').text
-    except:
+        location = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div[2]/p[3]/a').text
+    except Exception as e:
+        print(e)
         location = "None"
     # print(summary)
 
@@ -284,8 +300,9 @@ def get_info1(link,price,images,count):
     #     try:
     #         data['pages'].append(info_dict)
     #         # data['user'].append(listing)
-    #     except:
-    #         data = {
+    #     except Exception as e
+
+# print(e)    #         data = {
     #                 "pages" : [info_dict],
     #                 # "user" : [listing]
     #             }
@@ -319,7 +336,7 @@ def get_images():
     image_links=[]
 
     try:
-        images=driver.find_elements(By.XPATH"//img[@class='listing-img listing-img-large w-100 h-100']")
+        images=driver.find_elements(By.XPATH,"//img[@class='listing-img listing-img-large w-100 h-100']")
         for image in images:
             link=image.get_attribute('src')
 
@@ -339,7 +356,8 @@ def get_images():
 
         return image_list
 
-    except:
+    except Exception as e:
+        print(e)
         return "None"
 
     
@@ -354,43 +372,51 @@ def get_info2(link,price,images,count):
     time.sleep(5)
 
     try:
-        size = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div').text
-    except:
+        size = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div').text
+    except Exception as e:
+        print(e)
         size = "None"
 
     try:
-        access = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[1]').text
-    except:
+        access = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[1]').text
+    except Exception as e:
+        print(e)
         access = "None"
 
     try:
-        location = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div/p').text
-    except:
+        location = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div/p').text
+    except Exception as e:
+        print(e)
         location = "None"
 
-    # try:
-    time.sleep(3)                        
-    host = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[6]/div/a/div/div/div/p')
-        # driver.execute_script("arguments[0].scrollIntoView(true);",host)
-    host.location_once_scrolled_into_view
+    try:
+        time.sleep(3)                        
+        host = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[6]/div/a/div/div/div/p')
+            # driver.execute_script("arguments[0].scrollIntoView(true);",host)
+        host.location_once_scrolled_into_view
 
-    host_text = host.text
-    # except:
-    #     host_text = "None"
+        host_text = host.text
+    except Exception as e:
+        print(e)
+
+        host_text = "None"
     
     try:
-        summary = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[4]/p').text
-    except:
+        summary = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[4]/p').text
+    except Exception as e:
+        print(e)
         summary = "None"
 
     try:
-        hours = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[2]').text
-    except:
+        hours = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[2]').text
+    except Exception as e:
+        print(e)
         hours = "None"
 
     try:
-        height = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div[2]/p').text
-    except:
+        height = driver.find_element(By.XPATH,'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div[2]/p').text
+    except Exception as e:
+        print(e)
         height = "None"
    
 
@@ -426,7 +452,9 @@ def get_info2(link,price,images,count):
     #     try:
     #         data['pages'].append(info_dict)
     #         # data['user'].append(listing)
-    #     except:
+    #     except Exception as e:
+    # print(e)
+
     #         data = {
     #                 "pages" : [info_dict],
     #                 # "user" : [listing]
@@ -468,6 +496,7 @@ def run():
 
             except Exception as e:
                 print(e)
+    
                 get_info2(link,price,images, count)
         else:
             print("link already scraped")
@@ -485,10 +514,13 @@ def get_links():
         try:
 
             time.sleep(3)
-            div = driver.find_element(By.ID"search_listing_cards")
-            a_tags = div.find_elements_by(By.CLASS_NAME"card-body-container")
-            more = driver.find_element(By.ID"rentals_search_show_more")
+            div = driver.find_element(By.ID,"search_listing_cards")
+            a_tags = div.find_elements(By.CLASS_NAME,"card-body-container")
+            more = driver.find_element(By.ID,"rentals_search_show_more")
+            # more = driver.find_element(By.CLASS_NAME,"sc-pFZIQ.gbgfMs.inner")
             more.click()
+
+            print("getting links...")
 
             for a_tag in a_tags:
                 # print(a_tag.text)
@@ -496,7 +528,9 @@ def get_links():
                 # print(link)
                 link_list.append(link)    
             time.sleep(2)
-        except:
+        except Exception as e:
+            print(e)
+
             break
 
     for link in link_list:
@@ -521,7 +555,8 @@ def cities():
 
     # for city in cities_list:
     driver.get('https://www.neighbor.com/')
-    search = driver.find_element(By.ID"splash-search-input")
+    time.sleep(3)
+    search = driver.find_element(By.ID,"splash-search-input")
     search.send_keys("texas")
     search.send_keys(Keys.RETURN)
     run()
@@ -530,7 +565,7 @@ def cities():
 def startpy():
     driver.get("https://www.neighbor.com/")
     
-    # driver.maximize_window()
+    driver.maximize_window()
     
     # column_names=['city','city_ascii']
     # df= pd.read_csv('uscities.csv',names=column_names)
