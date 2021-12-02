@@ -26,7 +26,7 @@ chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 
 # user_agent = 'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
 
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
 # chrome_options.add_argument("--headless")
 # chrome_options.add_argument(f'user-agent={user_agent}')
