@@ -15,3 +15,8 @@ services:
         - DRIVER_PATH=${DRIVER_PATH}
 
       # restart: always
+
+  selenium: 
+    
+    image: selenium/standalone-chrome
+    restart: always
