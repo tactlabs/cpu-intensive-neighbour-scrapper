@@ -19,4 +19,4 @@ services:
   selenium: 
     
     image: selenium/standalone-chrome
-    restart: always
+    # restart: always
