@@ -529,7 +529,7 @@ def cities():
 def startpy():
     driver.get("https://www.neighbor.com/")
     
-    driver.maximize_window()
+    # driver.maximize_window()
     
     # column_names=['city','city_ascii']
     # df= pd.read_csv('uscities.csv',names=column_names)
