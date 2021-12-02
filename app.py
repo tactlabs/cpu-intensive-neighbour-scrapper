@@ -1,6 +1,6 @@
 from flask import *
-from cpu_stress import stress
-from scraper import get_data
+# from cpu_stress import stress
+# from scraper import get_data
 import tasks
 
 app = Flask(__name__)
