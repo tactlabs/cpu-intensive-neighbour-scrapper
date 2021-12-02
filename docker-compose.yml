@@ -11,4 +11,7 @@ services:
       volumes:
         - .:/app
 
+      environment:
+        - DRIVER_PATH=${DRIVER_PATH}
+
       # restart: always
