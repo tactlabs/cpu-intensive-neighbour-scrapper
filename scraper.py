@@ -12,6 +12,7 @@ from datetime import datetime
 from pprint import pprint
 import pandas as pd
 import csv
+from selenium.webdriver.common.by import By
 
 
 load_dotenv()
@@ -99,7 +100,7 @@ def get_price(link):
 
 
     try:
-        subtotal = driver.find_element_by_xpath('//*[@id="default_reserve_card_subtotal"]/div').text
+        subtotal = driver.find_element(By.XPATH'//*[@id="default_reserve_card_subtotal"]/div').text
     except:
         subtotal = "None"
     # print(subtotal)                            //*[@id="default_reserve_card_subtotal"]/div/p
@@ -107,9 +108,9 @@ def get_price(link):
     try:
         
         try:
-            service_tax = driver.find_element_by_xpath('//*[@id="reserve"]/div/div[3]/div[1]/div/div[2]/span/div/p[1]').text
+            service_tax = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[3]/div[1]/div/div[2]/span/div/p[1]').text
         except:
-            service_tax = driver.find_element_by_xpath('//*[@id="reserve"]/div/div[2]/div[1]/div/div[2]/span/div/p').text
+            service_tax = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[2]/div[1]/div/div[2]/span/div/p').text
     except:
         service_tax = "None"
     # print(service_tax)
@@ -117,9 +118,9 @@ def get_price(link):
     try:
         
         try:
-            total = driver.find_element_by_xpath('//*[@id="reserve"]/div/div[2]/div[2]/div[1]/p[2]').text
+            total = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[2]/div[2]/div[1]/p[2]').text
         except:
-            total = driver.find_element_by_xpath('//*[@id="reserve"]/div/div[3]/div[2]/span/div/span').text
+            total = driver.find_element(By.XPATH'//*[@id="reserve"]/div/div[3]/div[2]/span/div/span').text
     except:
         total = "None"
         
@@ -215,44 +216,44 @@ def get_info1(link,price,images,count):
     time.sleep(3)    
 
     try:
-        title = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/h2').text
+        title = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/h2').text
     except:
         title = "None"
     # print(title)                        
 
     specs = description()
 
-    size = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/p').text
+    size = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[1]/div/p').text
     # print(size)
 
-    storage = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[2]/p[2]').text
+    storage = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[2]/p[2]').text
     # print(storage)
 
 
-    access =  driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[3]/div[1]/p[2]').text
+    access =  driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[3]/div[1]/p[2]').text
     # print(access)
                                         
 
-    hours = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[4]/div[1]/div/p').text
+    hours = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div[1]/div/div[4]/div[1]/div/p').text
     # print(hours)
     try:                    
-        host = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div/span').text
+        host = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div/span').text
     except:
         host = "None"
     # print(host)
 
     try:
-        summary = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[3]/p[2]').text
+        summary = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[3]/p[2]').text
     except:
         summary = "None"
 
     try:
-        location = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div[2]/p[3]/a').text
+        location = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div[2]/p[3]/a').text
     except:
         location = "None"
     # print(summary)
 
-    # images = driver.find_elements_by_class_name("listing-img listing-img-large w-100 h-100")
+    # images = driver.find_elements_by(By.CLASS_NAME"listing-img listing-img-large w-100 h-100")
     # for image in images:
     #     image_link = image.get_attribute('src')
     #     print(image_link)
@@ -318,7 +319,7 @@ def get_images():
     image_links=[]
 
     try:
-        images=driver.find_elements_by_xpath("//img[@class='listing-img listing-img-large w-100 h-100']")
+        images=driver.find_elements(By.XPATH"//img[@class='listing-img listing-img-large w-100 h-100']")
         for image in images:
             link=image.get_attribute('src')
 
@@ -353,23 +354,23 @@ def get_info2(link,price,images,count):
     time.sleep(5)
 
     try:
-        size = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div').text
+        size = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div').text
     except:
         size = "None"
 
     try:
-        access = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[1]').text
+        access = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[1]').text
     except:
         access = "None"
 
     try:
-        location = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div/p').text
+        location = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[2]/div/p').text
     except:
         location = "None"
 
     # try:
     time.sleep(3)                        
-    host = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[6]/div/a/div/div/div/p')
+    host = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[6]/div/a/div/div/div/p')
         # driver.execute_script("arguments[0].scrollIntoView(true);",host)
     host.location_once_scrolled_into_view
 
@@ -378,17 +379,17 @@ def get_info2(link,price,images,count):
     #     host_text = "None"
     
     try:
-        summary = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[4]/p').text
+        summary = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[4]/p').text
     except:
         summary = "None"
 
     try:
-        hours = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[2]').text
+        hours = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[3]/div/div[1]/div[1]/p[2]').text
     except:
         hours = "None"
 
     try:
-        height = driver.find_element_by_xpath('//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div[2]/p').text
+        height = driver.find_element(By.XPATH'//*[@id="root"]/div/div[4]/div/div/div/div/div/div/div[1]/div[1]/div[2]/div[1]/div[2]/p').text
     except:
         height = "None"
    
@@ -484,9 +485,9 @@ def get_links():
         try:
 
             time.sleep(3)
-            div = driver.find_element_by_id("search_listing_cards")
-            a_tags = div.find_elements_by_class_name("card-body-container")
-            more = driver.find_element_by_id("rentals_search_show_more")
+            div = driver.find_element(By.ID"search_listing_cards")
+            a_tags = div.find_elements_by(By.CLASS_NAME"card-body-container")
+            more = driver.find_element(By.ID"rentals_search_show_more")
             more.click()
 
             for a_tag in a_tags:
@@ -520,7 +521,7 @@ def cities():
 
     # for city in cities_list:
     driver.get('https://www.neighbor.com/')
-    search = driver.find_element_by_id("splash-search-input")
+    search = driver.find_element(By.ID"splash-search-input")
     search.send_keys("texas")
     search.send_keys(Keys.RETURN)
     run()
