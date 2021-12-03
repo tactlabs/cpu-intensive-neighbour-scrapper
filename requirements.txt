@@ -8,6 +8,6 @@ dnspython
 celery
 redis
 lxml
-selenium
+selenium==3.141.0
 pandas
 fake-useragent
