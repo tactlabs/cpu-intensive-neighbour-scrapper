@@ -6,7 +6,7 @@ def startpy():
 
     get_data()
 
-    stress()
+    # stress()
 
 if __name__ == '__main__':
 
