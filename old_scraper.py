@@ -16,6 +16,7 @@ import csv
 
 load_dotenv()
 
+
 DRIVER_PATH = os.environ.get('DRIVER_PATH')
 chrome_options = Options()
 ua = UserAgent()
@@ -26,12 +27,10 @@ chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 
 # user_agent = 'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
 
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument(f'user-agent={user_agent}')
 
-driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=DRIVER_PATH)
+driver = webdriver.Chrome(options=chrome_options, executable_path=DRIVER_PATH)
 
 total_links_list = []
 
@@ -277,21 +276,21 @@ def get_info1(link,price,images,count):
     print(info_dict)
 
 
-    # with open("info.json", "r") as file:
-    #     data = json.load(file)
+    with open("info.json", "r") as file:
+        data = json.load(file)
 
-    #     try:
-    #         data['pages'].append(info_dict)
-    #         # data['user'].append(listing)
-    #     except:
-    #         data = {
-    #                 "pages" : [info_dict],
-    #                 # "user" : [listing]
-    #             }
+        try:
+            data['pages'].append(info_dict)
+            # data['user'].append(listing)
+        except:
+            data = {
+                    "pages" : [info_dict],
+                    # "user" : [listing]
+                }
                 
 
-    # with open("info.json", "w") as file:
-    #         json.dump(data, file, indent=4)
+    with open("info.json", "w") as file:
+            json.dump(data, file, indent=4)
 
     df = pd.DataFrame.from_dict(info_dict)
     if os.stat("info.csv").st_size == 0:
@@ -529,7 +528,7 @@ def cities():
 def startpy():
     driver.get("https://www.neighbor.com/")
     
-    driver.maximize_window()
+    # driver.maximize_window()
     
     # column_names=['city','city_ascii']
     # df= pd.read_csv('uscities.csv',names=column_names)
