@@ -1,22 +1,13 @@
-from flask import *
-# from cpu_stress import stress
-# from scraper import get_data
-import tasks
+from cpu_stress import stress
+# from scraper import get_data as invoke_crawler
+from scraper import startpy as get_data
 
-app = Flask(__name__)
+def startpy():
 
-@app.route('/ping',methods=['GET'])
-def ping():
+    get_data()
 
-    return jsonify({"ping":"pong"})
-
-@app.route('/crawl',methods=['GET'])
-def crawl():
-
-    tasks.crawl.delay()
-
-    return jsonify({"Message":"Task Started"})
+    # stress()
 
 if __name__ == '__main__':
 
-	app.run(host='0.0.0.0', port=9090, debug=True)
+    startpy()
