@@ -14,8 +14,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
 import os
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-import time
 
 load_dotenv()
 
@@ -31,16 +29,7 @@ driver = webdriver.Chrome(chrome_options=chrome_options, executable_path=DRIVER_
 def startpy():
 
     driver.get("https://google.com")
-    #print(driver.title)
-
-    search = driver.find_element_by_name("q")
-    search.send_keys("selenium")
-    search.send_keys(Keys.RETURN)
-
     print(driver.title)
-
-    time.sleep(5)
-    driver.quit()
 
 
 if __name__ == '__main__':
