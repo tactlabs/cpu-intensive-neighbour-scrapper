@@ -17,7 +17,7 @@ from selenium.webdriver.common.by import By
 
 load_dotenv()
 
-DRIVER_PATH = os.environ.get('DRIVER_PATH')
+DRIVER_PATH = os.environ.get('/home/elakia/softwares/chromedriver_linux64/chromedriver')
 chrome_options = Options()
 ua = UserAgent()
 userAgent = ua.random
