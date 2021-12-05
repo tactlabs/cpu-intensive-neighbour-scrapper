@@ -17,7 +17,7 @@ from selenium.webdriver.common.by import By
 
 load_dotenv()
 
-DRIVER_PATH = os.environ.get('/home/elakia/softwares/chromedriver_linux64/chromedriver')
+# DRIVER_PATH = os.environ.get('/home/elakia/softwares/chromedriver_linux64/chromedriver')
 chrome_options = Options()
 ua = UserAgent()
 userAgent = ua.random
@@ -30,7 +30,7 @@ chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
 
-driver = webdriver.Chrome(options=chrome_options, executable_path=DRIVER_PATH)
+driver = webdriver.Chrome(options=chrome_options, executable_path='/home/elakia/softwares/chromedriver_linux64/chromedriver')
 
 total_links_list = []
 
