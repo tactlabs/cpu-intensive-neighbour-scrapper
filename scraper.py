@@ -30,7 +30,7 @@ chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--window-size=1920x1080")
 
-driver = webdriver.Chrome(options=chrome_options, executable_path='DRIVER_PATH')
+driver = webdriver.Chrome(options=chrome_options, executable_path=DRIVER_PATH)
 
 total_links_list = []
 
